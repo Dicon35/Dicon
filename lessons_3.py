@@ -116,6 +116,26 @@ class Human:
         self.car.strength += 100
         self.money -= 50
 
+    def entertainment(self, manage):
+        if self.car.drive():
+            pass
+        else:
+            if self.car.fuel < 20:
+                manage = "fuel"
+            else:
+                self.to_repair()
+                return
+
+        if manage == "fuel":
+            print("I bought fuel")
+            self.money -= 100
+            self.car.fuel += 100
+        elif manage == "party":
+            print("I`m goin to the party")
+            self.gladness += 20
+            self.money  -= 15
+
+
     def days_indexes(self, day):
         day = f"Today the {day} of {self.name} life"
         print(f"{day:=^50}", "\n")
@@ -157,7 +177,7 @@ class Human:
             self.get_job()
             print(f"I don`t have a job, I`m boring to get a job {self.job} with salary {self.job}")
         self.days_indexes(day)
-        dice = random.randint(1, 4)
+        dice = random.randint(1, 5)
         if self.satiety < 20:
             print("I will go eat")
             self.eat()
@@ -186,6 +206,10 @@ class Human:
         elif dice == 4:
             print("time for treats")
             self.shopping("delicacies")
+        elif dice == 5:
+            print("I will go to perty")
+            self.entertainment()
+
 
 
 class Auto:
